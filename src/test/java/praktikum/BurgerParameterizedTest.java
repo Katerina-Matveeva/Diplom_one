@@ -8,6 +8,7 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -45,8 +46,13 @@ public class BurgerParameterizedTest extends BaseTest {
         burger.addIngredient(mockIngredient);
         String receipt = burger.getReceipt();
 
-        assertTrue(receipt.contains("(==== Test Bun ====)"));
-        assertTrue(receipt.contains("= " + expectedTypeString + " Test Ingredient ="));
-        assertTrue(receipt.contains("Price: 250,000000"));
+        System.out.println("Actual receipt: '" + receipt + "'");
+        String expectedReceipt = "(==== Test Bun ====)\n" +
+                "= " + expectedTypeString + " Test Ingredient =\n" +
+                "(==== Test Bun ====)\n" +
+                "\n" +
+                "Price: 250,000000\n";
+        assertEquals(expectedReceipt, receipt);
     }
+
 }

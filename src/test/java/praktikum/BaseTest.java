@@ -14,9 +14,9 @@ public class BaseTest {
     @Mock
     protected Ingredient mockIngredient;
     @Mock
-    protected Ingredient mockIngredient1;
+    protected Ingredient mockSauce;
     @Mock
-    protected Ingredient mockIngredient2;
+    protected Ingredient mockFilling;
 
     // Общий объект бургера
     protected Burger burger;
@@ -34,10 +34,10 @@ public class BaseTest {
             when(mockBun.getPrice()).thenReturn(100f);
             when(mockIngredient.getName()).thenReturn("Test Ingredient");
             when(mockIngredient.getPrice()).thenReturn(50f);
-            when(mockIngredient1.getName()).thenReturn("Test Ingredient 1");
-            when(mockIngredient1.getPrice()).thenReturn(50f);
-            when(mockIngredient2.getName()).thenReturn("Test Ingredient 2");
-            when(mockIngredient2.getPrice()).thenReturn(75f);
+            when(mockSauce.getName()).thenReturn("Test Sauce");
+            when(mockSauce.getPrice()).thenReturn(50f);
+            when(mockFilling.getName()).thenReturn("Test Filling");
+            when(mockFilling.getPrice()).thenReturn(75f);
         } catch (Exception e) {
             // Обработка исключений для безопасности
             throw new RuntimeException("Failed to initialize mocks", e);

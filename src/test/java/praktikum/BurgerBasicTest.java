@@ -1,7 +1,7 @@
 package praktikum;
 
 import org.junit.Test;
-
+import org.assertj.core.api.SoftAssertions;
 import static org.junit.Assert.*;
 
 public class BurgerBasicTest extends BaseTest {
@@ -12,20 +12,22 @@ public class BurgerBasicTest extends BaseTest {
         burger.setBuns(mockBun);
         assertEquals(mockBun, burger.bun);
     }
-
-    // Добавление ингредиента: размер списка увеличивается, и ингредиент добавляется правильно
+    // Добавление ингредиента: размер списка увеличивается
     @Test
-    public void testAddIngredient() {
-        burger.addIngredient(mockIngredient1);
+    public void testAddIngredientIncreasesSize() {
+        burger.addIngredient(mockSauce);
         assertEquals(1, burger.ingredients.size());
-        assertEquals(mockIngredient1, burger.ingredients.get(0));
-
     }
-
+    // Добавление ингредиента: ингредиент добавляется правильно
+    @Test
+    public void testAddIngredientAddsCorrect() {
+        burger.addIngredient(mockSauce);
+        assertEquals(mockSauce, burger.ingredients.get(0));
+    }
     // Удаление ингредиента: после добавления и удаления список пустой
     @Test
     public void testRemoveIngredient() {
-        burger.addIngredient(mockIngredient1);
+        burger.addIngredient(mockSauce);
         burger.removeIngredient(0);
         assertTrue(burger.ingredients.isEmpty());
     }
@@ -33,10 +35,12 @@ public class BurgerBasicTest extends BaseTest {
     // Перемещение ингредиента: первый ингредиент переходит на вторую позицию
     @Test
     public void testMoveIngredient() {
-        burger.addIngredient(mockIngredient1);
-        burger.addIngredient(mockIngredient2);
+        SoftAssertions softly = new SoftAssertions();
+        burger.addIngredient(mockSauce);
+        burger.addIngredient(mockFilling);
         burger.moveIngredient(0, 1);
-        assertEquals(mockIngredient2, burger.ingredients.get(0));
-        assertEquals(mockIngredient1, burger.ingredients.get(1));
+        softly.assertThat(burger.ingredients.get(0)).isEqualTo(mockFilling);
+        softly.assertThat(burger.ingredients.get(1)).isEqualTo(mockSauce);
+        softly.assertAll();
     }
 }

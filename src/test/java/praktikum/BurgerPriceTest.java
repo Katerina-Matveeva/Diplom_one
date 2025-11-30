@@ -12,16 +12,16 @@ public class BurgerPriceTest extends BaseTest {
     public void setUp() {
         super.setUp();
         when(mockBun.getPrice()).thenReturn(100f);
-        when(mockIngredient1.getPrice()).thenReturn(50f);
-        when(mockIngredient2.getPrice()).thenReturn(75f);
+        when(mockSauce.getPrice()).thenReturn(50f);
+        when(mockFilling.getPrice()).thenReturn(75f);
     }
 
     // Цена бургера с булочкой и двумя ингредиентами
     @Test
     public void testGetPrice() {
         burger.setBuns(mockBun);
-        burger.addIngredient(mockIngredient1);
-        burger.addIngredient(mockIngredient2);
+        burger.addIngredient(mockSauce);
+        burger.addIngredient(mockFilling);
         assertEquals(325f, burger.getPrice(), 0.01f);
     }
 
